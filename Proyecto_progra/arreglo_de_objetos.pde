@@ -15,6 +15,7 @@ void draw(){
   for(particula p : particulas){
     p.display();
     p.movimiento();
+    p.rebotar();
   }
 }
 
@@ -39,18 +40,23 @@ class particula{
   particula(){
     x=random(400);
     y=random(400);
-    v=random(10);
+    v=random(5);
     a=random(180);
     t=random(10,30);
     c=color(random(255),random(255),random(255));
+    a1=cos(a);
+    a2=sin(a);
   }
   
   particula(float x_,float y_){
     x=x_;
     y=y_;
+    v=random(5);
     a=random(180);
     t=random(10,30);
     c=color(random(255),random(255),random(255));
+    a1=cos(a);
+    a2=sin(a);
     
   }
   
@@ -65,11 +71,18 @@ class particula{
   
   void movimiento(){
     
-    a1=cos(a);
-    a2=sin(a);
     
-    x += a1;
-    y += a2;
+    x += a1*v;
+    y += a2*v;
+    
+  }
+  
+  void rebotar(){
+    if(x>=400||x<=0){
+    a1*=-1;}
+    if(y>=400||y<=0){
+    a2*=-1;}
+    
   }
   
 }
